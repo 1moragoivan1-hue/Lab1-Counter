@@ -1,40 +1,31 @@
-#include "CLI/CLI.hpp"
+#include "CLI/App.hpp"
 #include "test_bench.hpp"
 
 int main(int argc, char **argv, char **env){
-    int num_cycles{};
-    int num_levels{};
-    
     CLI::App app("Counter TestBench");
-    app.add_option("--cycles", num_cycles, "Number of cycles")->default_val(300);
-    app.add_option("--lvl", num_levels, "Number of levels")->default_val(99);
+    
+    TestBench::TBConfig config;
+    config.setup(app, __FILE__);
 
+    CLI11_PARSE(app, argc, argv);
     Verilated::commandArgs(argc,argv);
     // init top verilog instance
-    
 
-    auto top = std::make_unique<Vcounter>();
-    auto tfp = std::make_unique<VerilatedVcdC>();
-    //init trace dump
-    Verilated::traceEverOn(true);
+    TestBench::Simulator<Vcounter> sim(config.vcd_file, config.num_levels, config.trace);
 
-    top->trace(tfp.get(), num_levels);
-    tfp->open("counter.vcd");
-
-    top->clk = 1;
-    top->rst = 1;
-    top->en = 0;
+    sim->clk = 1;
+    sim->rst = 1;
+    sim->en = 0;
 
         // run simulation for many clock cycles
-    for (size_t cycle=0; cycle < num_cycles; cycle++) {
+    for (size_t cycle = 0; cycle < config.num_cycles; cycle++) {
         // dump variables into VCD file and toggle clock 
-        top->rst = (cycle <2) | (cycle == 15);
-        top->en = (cycle>4);
+        sim->rst = (cycle <2) | (cycle == 15);
+        sim->en = (cycle>4);
 
-        TestBench::eval_cycle(top.get(), tfp.get(), cycle);
+        sim.tick(cycle);
         if (Verilated::gotFinish()) break;
     }
-    tfp->close();
 }
 
 

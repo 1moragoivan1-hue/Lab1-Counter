@@ -1,3 +1,4 @@
+#pragma once
 /*!
  \file    vbuddy.cpp
  \brief   additional C++ code included in DUT testbench file to communicate with Vbuddy
@@ -9,6 +10,7 @@ This package is written to support a second year module on Electronics & Informa
 at Imperial College. The module is on the design of the RISC V CPU.
 */
 
+#include <string>
 using namespace std;
 using std::string;
 using std::stoi;

@@ -1,5 +1,5 @@
 build/
-
+.cache/
 .vscode/
 
 task1/obj_dir/
