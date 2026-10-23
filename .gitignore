@@ -1,0 +1,13 @@
+build/
+
+task1/.vscode/
+task2/.vscode/
+task3/.vscode/
+task4/.vscode/
+
+task1/obj_dir/
+task2/obj_dir/
+task3/obj_dir/
+task4/obj_dir/
+
+set
