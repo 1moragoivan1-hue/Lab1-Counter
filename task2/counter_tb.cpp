@@ -16,7 +16,7 @@ int main(int argc, char **argv, char **env){
     Vbuddy vbuddy("Task2: Counter");
 
     sim->clk = 1;
-    sim->rst = 1;
+    sim->rst = 0;
     sim->en = 0;
 
         // run simulation for many clock cycles
@@ -25,7 +25,7 @@ int main(int argc, char **argv, char **env){
         vbuddy.print_number(sim->count, config.digits);
         
         
-        sim->rst = (cycle <2) | (cycle == 15);
+        
         sim->en = vbdFlag();
 
         TestBench::tick(vbuddy, sim, cycle);

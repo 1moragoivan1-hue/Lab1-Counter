@@ -7,4 +7,6 @@ task2/obj_dir/
 task3/obj_dir/
 task4/obj_dir/
 
+*.vcd
+
 set

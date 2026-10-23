@@ -4,24 +4,22 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "vbuddy.hpp"
-#include "CLI/App.hpp"
-#include <atomic>
-#include <cstdint>
+#include "CLI/CLI.hpp"
 #include <cstdlib>
-#include <memory>
+
 
 namespace TestBench{
     struct TBConfig {
         int num_cycles{300};
         int num_levels{99};
-        const char * vcd_file{""};
-        bool trace{false};
+        std::string vcd_file{""};
+        bool trace{true};
         int digits = 5;
 
         void setup(CLI::App &app, const std::string &source_file) {
             app.option_defaults()->always_capture_default();
 
-            vcd_file = (std::filesystem::path(source_file).stem().string() + ".vcd").c_str();
+            vcd_file = std::filesystem::path(source_file).stem().string() + ".vcd";
             app.add_option("-c,--cycles", num_cycles, "Number of simulation cycles");
             app.add_option("-l,--lvl", num_levels, "Number of levels");
             app.add_option("--vcd", vcd_file, "VCD output filename");
@@ -51,7 +49,7 @@ namespace TestBench{
             }
         }
 
-        Module* operator->() { return top; }
+        Module* operator->() { return top.get(); }
         VerilatedVcdC* get() const { return tfp.get(); }
 
         void tick(size_t cycle) {
