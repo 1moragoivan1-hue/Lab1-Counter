@@ -1,7 +1,7 @@
 // Design Name : bin2bcd
 // File Name : bin2bcd.v
 // Function : convert 8-bit binary number in to three BCD digits
-// Author:  Peter Cheung
+// Author:  Ivan Morago
 // Version: 2.0 (26 Aug 2022)
 //---------------------------------------------------
 //ALGORITHM: (See explanation on course webpage)

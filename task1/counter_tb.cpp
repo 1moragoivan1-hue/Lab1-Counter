@@ -1,5 +1,6 @@
 #include "CLI/App.hpp"
 #include "test_bench.hpp"
+#include "Vcounter.h"
 
 int main(int argc, char **argv, char **env){
 

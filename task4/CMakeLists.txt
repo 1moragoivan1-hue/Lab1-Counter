@@ -1,0 +1,1 @@
+add_scoped_executable(top top.sv counter.sv bin2bcd.sv)

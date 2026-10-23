@@ -1,6 +1,7 @@
 #include "test_bench.hpp"
 #include "CLI/App.hpp"
 #include "vbuddy.hpp"
+#include "Vcounter.h"
 
 int main(int argc, char **argv, char **env){
     CLI::App app("Counter TestBench");

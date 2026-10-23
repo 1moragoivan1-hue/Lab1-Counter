@@ -1,0 +1,1 @@
+add_scoped_executable(counter counter.sv)

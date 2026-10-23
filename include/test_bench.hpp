@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Vcounter.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "vbuddy.hpp"
@@ -15,6 +14,8 @@ namespace TestBench{
         std::string vcd_file{""};
         bool trace{true};
         int digits = 5;
+        bool unbounded = false;
+        
 
         void setup(CLI::App &app, const std::string &source_file) {
             app.option_defaults()->always_capture_default();
@@ -23,10 +24,15 @@ namespace TestBench{
             app.add_option("-c,--cycles", num_cycles, "Number of simulation cycles");
             app.add_option("-l,--lvl", num_levels, "Number of levels");
             app.add_option("--vcd", vcd_file, "VCD output filename");
-            app.add_option("--digits", digits, "Number of digits on screen");
+            app.add_option("--digits,-d", digits, "Number of digits on screen");
             app.add_flag("-t,--trace", trace, "Enable signal tracing");
-            
-        }   
+            app.add_flag("-u,--unbounded", unbounded, "Run loop forever (usually on Vbuddy)");
+
+        }
+
+        bool should_stop(int cycle) {
+            return unbounded ? true : cycle < num_cycles;
+        }
     };
 
     template <typename Module>

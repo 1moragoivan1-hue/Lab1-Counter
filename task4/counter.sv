@@ -1,0 +1,17 @@
+
+module counter #(
+    parameter WIDTH = 8
+)(
+    //interface signals
+    input   logic           clk,
+    input   logic           rst,
+    input   logic           en,
+    output  logic[WIDTH-1:0] count
+);
+
+// padding en with leading zeros to WIDTH bits, then add it to count.
+always_ff @ (posedge clk, posedge rst)
+    if (rst) count <= {WIDTH{1'b0}};
+    else count <= count + {{WIDTH-1{1'b0}}, en};
+
+endmodule

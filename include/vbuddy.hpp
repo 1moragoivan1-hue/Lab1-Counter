@@ -1,9 +1,15 @@
 #pragma once
+
 #include "vbuddy.cpp"
 #include <cstdlib>
-
 class Vbuddy {
 public:
+
+    enum class FlagType : int {
+        TOGGLE,
+        ARMED
+    };
+
     Vbuddy(const char* title) {
         if (vbdOpen() != 1) exit(EXIT_FAILURE);
         vbdHeader(title);
@@ -18,6 +24,19 @@ public:
 
     void tick(int cycle) {
         vbdCycle(cycle + 1);
+    }
+
+    bool flag() {
+        return vbdFlag();
+    }
+
+    uint value() {
+        return vbdValue();
+    }
+
+    void mode(FlagType flag) {
+        vbdSetMode((int)flag);
+
     }
 
     ~Vbuddy() {
