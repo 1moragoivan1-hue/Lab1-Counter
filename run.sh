@@ -25,5 +25,4 @@ cd "$TASK_FOLDER"
 "./${TARGET}" "$@"
 
 # Open the generated waveform.
-surfer "${MODULE_NAME}.vcd"
-
+gtkwave "${MODULE_NAME}_tb.vcd"

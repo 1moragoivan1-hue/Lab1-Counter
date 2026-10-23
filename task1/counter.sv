@@ -10,7 +10,7 @@ module counter #(
 );
 
 // padding en with leading zeros to WIDTH bits, then add it to count.
-always_ff @ (posedge clk)
+always_ff @ (posedge clk, posedge rst)
     if (rst) count <= {WIDTH{1'b0}};
     else count <= count + {{WIDTH-1{1'b0}}, en};
 
