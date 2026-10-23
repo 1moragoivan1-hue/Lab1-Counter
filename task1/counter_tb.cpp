@@ -1,19 +1,6 @@
-#include "Vcounter.h"
-#include "verilated.h"
-#include "verilated_vcd_c.h"
-#include <cstdlib>
-#include <string>
 #include "CLI/CLI.hpp"
+#include "test_bench.hpp"
 
-namespace TestBench{
-    void eval_cycle(Vcounter* top, VerilatedVcdC* tfp, size_t cycle){
-        for (int i=0; i<2; i++) {
-            tfp->dump (2*cycle+i);     // unit is in ps!!!
-            top->clk = !top->clk;
-            top->eval ();
-        }
-    }
-}
 int main(int argc, char **argv, char **env){
     int num_cycles{};
     int num_levels{};

@@ -16,8 +16,9 @@ shift 2
 TARGET="task${TASK_NUM}_${MODULE_NAME}"
 TASK_FOLDER="./build/task${TASK_NUM}"
 
+mkdir -p "$TASK_FOLDER"
 # Build the executable.
-cmake --build build --target "$MODULE_NAME"
+cmake --build build --target "$TARGET"
 
 # Run inside the task's build folder so the VCD is written there.
 cd "$TASK_FOLDER"

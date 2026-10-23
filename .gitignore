@@ -1,9 +1,6 @@
 build/
 
-task1/.vscode/
-task2/.vscode/
-task3/.vscode/
-task4/.vscode/
+.vscode/
 
 task1/obj_dir/
 task2/obj_dir/

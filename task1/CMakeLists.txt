@@ -1,6 +1,6 @@
-add_executable(counter counter_tb.cpp)
+add_executable(task1_counter counter_tb.cpp)
 
-verilate(counter
+verilate(task1_counter
     SOURCES counter.sv 
     TRACE
 )
